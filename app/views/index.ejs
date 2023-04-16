@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Sewa dan rental mobil">
+		<meta name="keywords" content="Sewa, Rental, Mobil">
+		<meta name="author" content="Muhammad Arief Fadhlan">
+		<title>Dashboard Mobil</title>
+		<link href="/css/style.css" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	</head>
+	<body>
+		<%- include('layouts/sidebar.ejs') -%>
+		
+		<main class="list-cars">
+			<%- include('layouts/header.ejs') -%>
+			<div class="list-cars__contents">
+				<div class="list-cars__breadcrumb d-flex align-items-center">
+					<a href="#" class="breadcrumb-item active fw-bold text-decoration-none">Cars</a>
+					<img src="/icons/chevron-right.svg" alt="Chevron Right">
+					<a href="/" class="breadcrumb-item font-rubik fw-light text-decoration-none">List Car</a>
+				</div>
+				<div class="list-cars__top-section d-flex justify-content-between align-items-center">
+					<h1 class="list-cars__title mb-0 fw-bold">List Car</h1>
+					<a href="/cars/create" class="list-cars__new-car-button d-flex justify-content-center align-items-center text-decoration-none">
+						<img src="/icons/plus.svg" alt="Add">
+						Add New Car
+					</a>
+				</div>
+				<div class="list-cars__size d-flex align-items-center">
+					<button class="list-cars__size-button active fw-bold">All</button>
+					<button class="list-cars__size-button fw-bold">Small</button>
+					<button class="list-cars__size-button fw-bold">Medium</button>
+					<button class="list-cars__size-button fw-bold">Large</button>
+				</div>	
+				<div class="list-cars__items">
+					<% cars.forEach(car => { %>
+						<div class="list-cars__card d-flex flex-column">
+							<div class="list-cars__card-body d-flex flex-column">
+								<div class="list-cars__card__image-container d-flex justify-content-center align-items-center">
+									<img src="<%= car.image %>" alt="Car" class="list-cars__card__image">
+								</div>
+								<div class="list-cars__card__info d-flex flex-column">
+									<span class="list-cars__card__model"><%= car.name %>/<%= car.size %></span>
+									<span class="list-cars__card__price fw-bold">Rp <%= Number(car.rent_per_day).toLocaleString("id-ID") %> / hari</span>
+									<div class="list-card__card__updated-at d-flex">
+										<img src="/icons/clock.svg" alt="Updated At">
+										<span class="fw-light">
+											Updated at 
+											<%= car.updatedAt.getDate()%> 
+											<%= car.updatedAt.toLocaleString('id-ID', { month: 'short' }) %> 
+											<%= car.updatedAt.getFullYear() %>, 
+											<%= car.updatedAt.getHours() %>.<%= car.updatedAt.getMinutes() %>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="list-card__card__actions d-flex">
+								<form action="/cars/delete/<%= car.id %>" class="list-card__card-delete-form">
+									<button type="submit" class="list-card__card-delete d-flex justify-content-center align-items-center fw-bold">
+										<img src="/icons/delete.svg" alt="Delete">
+										Delete
+									</button>
+								</form>
+								<a href="/cars/edit/<%= car.id %>" class="list-card__card-edit d-flex justify-content-center align-items-center fw-bold text-decoration-none">
+									<img src="/icons/edit.svg" alt="Edit">
+									Edit
+								</a>
+							</div>
+						</div>
+					<% }) %>
+				</div>
+			</div>
+		</main>
+		
+		<%- include('components/modal.ejs') -%>
+
+		<!-- JQuery -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!-- Bootstrap -->
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+		<!-- Script -->
+		<script src="/js/app.js"></script>
+	</body>
+</html>
