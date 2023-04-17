@@ -6,7 +6,7 @@ Repository ini dibuat untuk memenuhi challenge chapter 4 dari Studi Independen B
 
 ![DB Diagram](erd.png)
 
-## API Endpoint
+## Endpoint
 
 1. Menampilkan halaman utama | GET: <http://127.0.0.1:4000/>
 2. Menampilkan halaman tambah data | GET: <http://127.0.0.1:4000/cars/create>

@@ -18,34 +18,7 @@
 		<main class="list-cars">
 			<%- include('layouts/header.ejs') -%>
 			<div class="list-cars__contents position-relative">
-				<% if (messages.success) { %>
-					<div class="list-cars__notification d-flex justify-content-center align-items-center position-absolute">
-						<div class="list-cars__notification-contents notification-success font-rubik position-relative d-flex justify-content-center align-items-center">
-							<span><%= messages.success %></span>
-							<button type="button" onclick="closeNotification()" class="notification-button position-absolute">
-								<img src="/icons/x-mark.svg" alt="close">
-							</button>
-						</div>
-					</div>
-				<% } else if (messages.successDelete) { %>
-					<div class="list-cars__notification d-flex justify-content-center align-items-center position-absolute">
-						<div class="list-cars__notification-contents notification-success-delete font-rubik position-relative d-flex justify-content-center align-items-center">
-							<span><%= messages.successDelete %></span>
-							<button type="button" onclick="closeNotification()" class="notification-button position-absolute">
-								<img src="/icons/x-mark.svg" alt="close">
-							</button>
-						</div>
-					</div>
-				<% } else if (messages.error) { %>
-					<div class="list-cars__notification d-flex justify-content-center align-items-center position-absolute">
-						<div class="list-cars__notification-contents notification-error font-rubik position-relative d-flex justify-content-center align-items-center">
-							<span><%= messages.error %></span>
-							<button type="button" onclick="closeNotification()" class="notification-button position-absolute">
-								<img src="/icons/x-mark.svg" alt="close">
-							</button>
-						</div>
-					</div>
-				<% } %>
+				<%- include('components/notification.ejs') -%>
 				<div class="list-cars__breadcrumb d-flex">
 					<a href="#" class="breadcrumb-item active fw-bold text-decoration-none">Cars</a>
 					<img src="/icons/chevron-right.svg" alt="Chevron Right">
@@ -65,39 +38,45 @@
 					<button class="list-cars__size-button fw-bold">Large</button>
 				</div>	
 				<div class="list-cars__items">
-					<% cars.forEach(car => { %>
-						<div class="list-cars__card d-flex flex-column">
-							<div class="list-cars__card-body d-flex flex-column">
-								<div class="list-cars__card__image-container d-flex justify-content-center align-items-center">
-									<img src="<%= car.image %>" alt="Car" class="list-cars__card__image">
-								</div>
-								<div class="list-cars__card__info d-flex flex-column">
-									<span class="list-cars__card__model"><%= car.name %>/<%= car.size %></span>
-									<span class="list-cars__card__price fw-bold">Rp <%= Number(car.rent_per_day).toLocaleString("id-ID") %> / hari</span>
-									<div class="list-card__card__updated-at d-flex">
-										<img src="/icons/clock.svg" alt="Updated At">
-										<span class="fw-light">
-											Updated at 
-											<%= car.updatedAt.getDate()%> 
-											<%= car.updatedAt.toLocaleString('id-ID', { month: 'short' }) %> 
-											<%= car.updatedAt.getFullYear() %>, 
-											<%= car.updatedAt.getHours() %>.<%= car.updatedAt.getMinutes() %>
-										</span>
+					<% if (cars.length > 0) { %>
+						<% cars.forEach(car => { %>
+							<div class="list-cars__card d-flex flex-column">
+								<div class="list-cars__card-body d-flex flex-column">
+									<div class="list-cars__card__image-container d-flex justify-content-center align-items-center">
+										<img src="<%= car.image %>" alt="Car" class="list-cars__card__image">
+									</div>
+									<div class="list-cars__card__info d-flex flex-column">
+										<span class="list-cars__card__model"><%= car.name %>/<%= car.size %></span>
+										<span class="list-cars__card__price fw-bold">Rp <%= Number(car.rent_per_day).toLocaleString("id-ID") %> / hari</span>
+										<div class="list-card__card__updated-at d-flex">
+											<img src="/icons/clock.svg" alt="Updated At">
+											<span class="fw-light">
+												Updated at 
+												<%= car.updatedAt.getDate()%> 
+												<%= car.updatedAt.toLocaleString('id-ID', { month: 'short' }) %> 
+												<%= car.updatedAt.getFullYear() %>, 
+												<%= car.updatedAt.getHours() %>.<%= car.updatedAt.getMinutes() %>
+											</span>
+										</div>
 									</div>
 								</div>
+								<div class="list-card__card__actions d-flex">
+									<button type="button" onclick="setFormAction()" data-bs-toggle="modal" data-bs-target="#modalDelete" data-attr="<%= car.id %>" class="list-card__card-delete d-flex justify-content-center align-items-center fw-bold">
+										<img src="/icons/delete.svg" alt="Delete">
+										Delete
+									</button>
+									<a href="/cars/edit/<%= car.id %>" class="list-card__card-edit d-flex justify-content-center align-items-center fw-bold text-decoration-none">
+										<img src="/icons/edit.svg" alt="Edit">
+										Edit
+									</a>
+								</div>
 							</div>
-							<div class="list-card__card__actions d-flex">
-								<button type="button" onclick="setFormAction()" data-bs-toggle="modal" data-bs-target="#modalDelete" data-attr="<%= car.id %>" class="list-card__card-delete d-flex justify-content-center align-items-center fw-bold">
-									<img src="/icons/delete.svg" alt="Delete">
-									Delete
-								</button>
-								<a href="/cars/edit/<%= car.id %>" class="list-card__card-edit d-flex justify-content-center align-items-center fw-bold text-decoration-none">
-									<img src="/icons/edit.svg" alt="Edit">
-									Edit
-								</a>
-							</div>
+						<% }) %>
+					<% } else { %>
+						<div class="list-cars__empty-data shadow-sm">
+							<h1 class="list-cars__empty-data-message">Data mobil masih kosong.</h1>
 						</div>
-					<% }) %>
+					<% } %>
 				</div>
 			</div>
 		</main>

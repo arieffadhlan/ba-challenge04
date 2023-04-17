@@ -14,12 +14,6 @@ exports.renderUpdateCar = async (req, res) => {
 	res.render("pages/edit-car", { car });
 }
 
-exports.renderByPk = async (req, res) => {
-	const id = 11;
-	const car = await Car.findByPk(id);
-	res.render("index", {car});   
-}
-
 exports.getAllCars = async (req, res) => {
 	try {
 		const cars = await Car.findAll();

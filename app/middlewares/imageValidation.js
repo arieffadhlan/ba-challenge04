@@ -17,29 +17,23 @@ const upload = multer({
   storage: storage,
   fileFilter: imageFilter,
   limits: {
-    fileSize: 2 * 1024 * 1024,
+    fileSize: 209715, // 2 mb
   },
 }).single("image");
 
-const imgUploader = (req, res, next) => {
+exports.imageValidation = (req, res, next) => {
   upload(req, res, function (err) {
     if (err instanceof multer.MulterError) {
       // A Multer error occurred when uploading.
-      res.status(400).json({
-        message: err.message,
-        err_msg: err.code,
-      });
+      req.flash("error", err.message);
+      res.redirect("/");
       return;
     } else if (err) {
       // An unknown error occurred when uploading.
-      res.status(400).json({
-        message: err.message,
-        err_msg: err.code,
-      });
+      req.flash("error", err.message);
+      res.redirect("/");
       return;
     }
     next();
   });
 };
-
-module.exports = imgUploader;
