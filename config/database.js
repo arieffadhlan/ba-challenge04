@@ -1,6 +1,3 @@
-/**
- * Manages database connection configuration
- */
 const {
     DB_USERNAME = "postgres", 
     DB_PASSWORD = "postgres", 

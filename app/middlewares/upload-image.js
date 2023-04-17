@@ -2,18 +2,20 @@ const multer = require("multer");
 const path = require("path");
 
 const storage = multer.memoryStorage();
+const fileExtensions = [".png", ".jpg", ".jpeg"];
 
-const imgFilter = (req, file, callback) => {
-  let extFile = path.extname(file.originalname);
-  if (extFile === ".png" || extFile === ".jpg" || extFile === ".jpeg")
+const imageFilter = (req, file, callback) => {
+  let fileExtension = path.extname(file.originalname);
+  if (fileExtensions.includes(fileExtension)) {
     return callback(null, true);
+  }
   callback(null, false);
-  callback(new Error("Filetype must be PNG/JPG/JPEG"));
+  callback(new Error("File gambar harus berupa png, jpg, atau jpeg."));
 };
 
 const upload = multer({
   storage: storage,
-  fileFilter: imgFilter,
+  fileFilter: imageFilter,
   limits: {
     fileSize: 2 * 1024 * 1024,
   },

@@ -1,10 +1,10 @@
 const cloudinary = require("../../config/cloudinary");
 const getPublicId = require("../../utils/getPublicId");
 
-const cloudinaryDelete = async (req, res, next) => {
+exports.cloudinaryDelete = async (req, res, next) => {
   try {
-    const public_id = getPublicId(req.car.image);
-    await cloudinary.uploader.destroy(public_id);
+    const publicId = getPublicId(req.car.image);
+    await cloudinary.uploader.destroy(publicId);
 
     next();
   } catch (error) {
@@ -12,5 +12,3 @@ const cloudinaryDelete = async (req, res, next) => {
     res.redirect("back");
   }
 };
-
-module.exports = cloudinaryDelete;

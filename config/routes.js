@@ -1,17 +1,14 @@
 const express = require("express");
 const controllers = require("../app/controllers");
 const middlewares = require("../app/middlewares");
-const imageUploader = require("../app/middlewares/imageUploader");
-const cloudninaryUpload = require("../app/middlewares/cloudinary-upload");
-const cloudninaryDelete = require("../app/middlewares/cloudinary-delete");
-const cloudinaryDelete = require("../app/middlewares/cloudinary-delete");
-const appRouter = express.Router();
+const imageUploader = require("../app/middlewares/upload-image");
+const router = express.Router();
 
-appRouter.get("/", controllers.renderHome);
-appRouter.get("/cars/create", controllers.renderAddCar);
-appRouter.post("/cars/create", imageUploader, cloudninaryUpload, controllers.addCar);
-appRouter.get("/cars/edit/:id", middlewares.isCarExists, controllers.renderUpdateCar);
-appRouter.post("/cars/update/:id", middlewares.isCarExists, imageUploader, cloudninaryUpload, controllers.updateCar);
-appRouter.get("/cars/delete/:id", middlewares.isCarExists, cloudinaryDelete, controllers.deleteCar);
+router.get("/", controllers.renderHome);
+router.get("/cars/create", controllers.renderAddCar);
+router.post("/cars/create", imageUploader, middlewares.cloudinaryUpload, controllers.addCar);
+router.get("/cars/edit/:id", middlewares.isCarExists, controllers.renderUpdateCar);
+router.post("/cars/update/:id", middlewares.isCarExists, imageUploader, middlewares.cloudinaryUpload, controllers.updateCar);
+router.get("/cars/delete/:id", middlewares.isCarExists, middlewares.cloudinaryDelete, controllers.deleteCar);
 
-module.exports = appRouter;
+module.exports = router;

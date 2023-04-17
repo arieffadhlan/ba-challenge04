@@ -175,10 +175,6 @@ body {
   margin-left: 290px;
 }
 
-.breadcrumb-item:hover {
-  color: #000000;
-}
-
 .list-cars__contents {
   padding: 32px 24px;
 }
@@ -194,6 +190,7 @@ body {
   color: #222222;
 }
 
+.breadcrumb-item:hover,
 .breadcrumb-item.active {
   color: #000000;
 }
@@ -323,14 +320,24 @@ body {
   color: #ffffff;
 }
 
-/* Add new car */
-.add-car {
-  padding: 32px 24px;
+/* Car form */
+.car-form {
   background-color: #F4F5F7;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.add-car__breadcrumb {
+.sidebar.active + .car-form {
+  width: calc(100% - 290px);
+  margin-left: 290px;
+}
+
+.car-form__contents {
+  padding: 32px 24px;
+}
+
+.car-form__breadcrumb {
   gap: 4px;
   margin-bottom: 28px;
 }
@@ -341,31 +348,32 @@ body {
   color: #222222;
 }
 
+.breadcrumb-item:hover,
 .breadcrumb-item.active {
   color: #000000;
 }
 
-.add-car__title {
+.car-form__title {
   margin-bottom: 16px;
   font-size: 20px;
   line-height: 30px;
 }
 
-.add-car__form {
+.car-form__form {
   gap: 16px;
   padding: 16px;
   border-radius: 2px;
   background-color: #ffffff;
 }
 
-.add-car__form-label {
+.car-form__form-label {
   width: 148px;
   font-size: 12px;
   line-height: 18px;
   color: #3C3C3C;
 }
 
-.add-car__form-input {
+.car-form__form-input {
   max-width: 339px;
   width: 100%;
   height: 36px;
@@ -377,17 +385,17 @@ body {
   line-height: 18px;
 }
 
-.add-car__form-input:focus {
+.car-form__form-input:focus {
   border: 1px solid #091B6F;
 }
 
-.add-car__form-input::placeholder {
+.car-form__form-input::placeholder {
   font-size: 12px;
   line-height: 18px;
   color: #8A8A8A;
 }
 
-.add-car__form-options {
+.car-form__form-options {
   top: 43px;
   width: 210px;
   z-index: 1;
@@ -396,7 +404,7 @@ body {
   background-color: #FFFFFF;
 }
 
-.add-car__form-option {
+.car-form__form-option {
   cursor: pointer;
   padding: 10px;
   font-size: 12px;
@@ -404,38 +412,56 @@ body {
   color: #3C3C3C;
 }
 
-.add-car__form-option:hover {
+.car-form__form-option:hover {
   font-weight: 500;
   background-color: #e6e8f1;
   color: #091B6F;
 }
 
-.add-car__input-container {
+.car-form__input-container {
   max-width: 339px;
   width: 100%;
 }
 
-#input-size-container {
+#input-size-container,
+#input-image-container {
   max-width: 339px;
   width: 100%;
 }
 
-#input-size-container input {
+#input-size-container input,
+#input-image-container label {
   cursor: pointer;
 }
 
-#input-size-container img {
+#input-size-container img,
+#input-image-container img {
   cursor: pointer;
   top: 9px;
   right: 12px;
 }
 
-.add-car__form-actions {
+#input-image-placeholder {
+  width: 288px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #8A8A8A;
+}
+
+.car-form__form-helper {
+  margin-top: 4px;
+  font-size: 10px;
+  line-height: 14px;
+  color: #8A8A8A;
+}
+
+.car-form__form-actions {
   gap: 16px;
   margin-top: 200px;
 }
 
-.add-car__form-actions button {
+.car-form__form-actions button {
   padding: 8px 12px;
   outline: none;
   border-radius: 2px;
@@ -444,13 +470,13 @@ body {
   line-height: 20px;
 }
 
-.add-car__form-button.btn-cancel {
+.car-form__form-button.btn-cancel {
   border: 1px solid #0D28A6;
   background-color: #ffffff;
   color: #0D28A6;
 }
 
-.add-car__form-button.btn-save {
+.car-form__form-button.btn-save {
   border: none;
   background-color: #0D28A6;
   color: #ffffff;
