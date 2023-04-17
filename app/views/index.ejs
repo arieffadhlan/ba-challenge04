@@ -27,6 +27,15 @@
 							</button>
 						</div>
 					</div>
+				<% } else if (messages.successDelete) { %>
+					<div class="list-cars__notification d-flex justify-content-center align-items-center position-absolute">
+						<div class="list-cars__notification-contents notification-success-delete font-rubik position-relative d-flex justify-content-center align-items-center">
+							<span><%= messages.successDelete %></span>
+							<button type="button" onclick="closeNotification()" class="notification-button position-absolute">
+								<img src="/icons/x-mark.svg" alt="close">
+							</button>
+						</div>
+					</div>
 				<% } else if (messages.error) { %>
 					<div class="list-cars__notification d-flex justify-content-center align-items-center position-absolute">
 						<div class="list-cars__notification-contents notification-error font-rubik position-relative d-flex justify-content-center align-items-center">
@@ -78,12 +87,10 @@
 								</div>
 							</div>
 							<div class="list-card__card__actions d-flex">
-								<form action="/cars/delete/<%= car.id %>" class="list-card__card-delete-form">
-									<button type="submit" class="list-card__card-delete d-flex justify-content-center align-items-center fw-bold">
-										<img src="/icons/delete.svg" alt="Delete">
-										Delete
-									</button>
-								</form>
+								<button type="button" onclick="setFormAction()" data-bs-toggle="modal" data-bs-target="#modalDelete" data-attr="<%= car.id %>" class="list-card__card-delete d-flex justify-content-center align-items-center fw-bold">
+									<img src="/icons/delete.svg" alt="Delete">
+									Delete
+								</button>
 								<a href="/cars/edit/<%= car.id %>" class="list-card__card-edit d-flex justify-content-center align-items-center fw-bold text-decoration-none">
 									<img src="/icons/edit.svg" alt="Edit">
 									Edit

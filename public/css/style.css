@@ -12,6 +12,61 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
+/* Modal Delete */
+#modalDelete {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-delete__contents {
+  gap: 24px;
+  padding: 24px 32px;
+  border: none !important;
+  border-radius: 4px !important;
+}
+
+.modal-delete__text {
+  gap: 16px;
+  text-align: center;
+}
+
+.modal-delete__title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.modal-delete__description {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.modal-delete__actions {
+  gap: 16px;
+}
+
+.modal-delete__actions button {
+  height: 36px;
+  padding: 8px 35px;
+  outline: none;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.btn-delete__continue {
+  border: none;
+  background-color: #0D28A6;
+  color: #ffffff;
+}
+
+.btn-delete__cancel {
+  border: 1px solid #0D28A6;
+  background-color: #ffffff;
+  color: #0D28A6;
+}
+
 /* sidebar */
 .sidebar {
   z-index: 2;
@@ -199,6 +254,10 @@ body {
 
 .notification-success {
   background-color: #73CA5C;
+}
+
+.notification-success-delete {
+  background-color: #151515;
 }
 
 .notification-error {
