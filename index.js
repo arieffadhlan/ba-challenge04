@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const flash = require('express-flash');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const path = require("path");
 const routes = require("./config/routes");
 
@@ -17,6 +20,13 @@ app.set("views", viewsDir);
 app.set("view engine", "ejs");
 
 app.use(express.static(publicDir));
+app.use(cookieParser('keyboard cat'));
+app.use(session({ 
+	cookie: { maxAge: 60000 },
+	resave: true,
+	saveUninitialized: true,
+}));
+app.use(flash());
 
 app.use(routes);
 

@@ -17,8 +17,27 @@
 		
 		<main class="list-cars">
 			<%- include('layouts/header.ejs') -%>
-			<div class="list-cars__contents">
-				<div class="list-cars__breadcrumb d-flex align-items-center">
+			<div class="list-cars__contents position-relative">
+				<% if (messages.success) { %>
+					<div class="list-cars__notification d-flex justify-content-center align-items-center position-absolute">
+						<div class="list-cars__notification-contents notification-success font-rubik position-relative d-flex justify-content-center align-items-center">
+							<span><%= messages.success %></span>
+							<button type="button" onclick="closeNotification()" class="notification-button position-absolute">
+								<img src="/icons/x-mark.svg" alt="close">
+							</button>
+						</div>
+					</div>
+				<% } else if (messages.error) { %>
+					<div class="list-cars__notification d-flex justify-content-center align-items-center position-absolute">
+						<div class="list-cars__notification-contents notification-error font-rubik position-relative d-flex justify-content-center align-items-center">
+							<span><%= messages.error %></span>
+							<button type="button" onclick="closeNotification()" class="notification-button position-absolute">
+								<img src="/icons/x-mark.svg" alt="close">
+							</button>
+						</div>
+					</div>
+				<% } %>
+				<div class="list-cars__breadcrumb d-flex">
 					<a href="#" class="breadcrumb-item active fw-bold text-decoration-none">Cars</a>
 					<img src="/icons/chevron-right.svg" alt="Chevron Right">
 					<a href="/" class="breadcrumb-item font-rubik fw-light text-decoration-none">List Car</a>

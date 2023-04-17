@@ -7,3 +7,8 @@ sidebarButton.addEventListener("click", () => {
 		? sidebar.classList.remove("active")
 		: sidebar.classList.add("active");
 });
+
+const closeNotification = () => {
+	const notificationContainer = document.querySelector(".list-cars__notification")
+	notificationContainer.remove();
+}

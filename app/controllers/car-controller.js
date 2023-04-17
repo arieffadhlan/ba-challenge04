@@ -39,33 +39,33 @@ exports.getCar = async (req, res) => {
 
 exports.addCar = async (req, res) => {
     try {
-        const data = {
+        const carData = {
             name: req.body.name,
             rent_per_day: req.body.rent_per_day,
             size: req.body.size,
             image: req.image
         }
-        await Car.create({...data});
+        await Car.create({...carData});
+        req.flash("success", "Data Berhasil Disimpan");
         res.redirect("/");
     } catch (error) {
-        res.status(500).json({
-            status: "Error",
-            message: error.message,
-        });
+        req.flash("error", error.message);
+        res.redirect("/");
     }
 };
 
 exports.updateCar = async (req, res) => {
     try {
-        const data = {
+        const carData = {
             name: req.body.name,
             rent_per_day: req.body.rent_per_day,
             size: req.body.size,
             image: req.image
         }
-        await Car.update({...data}, {
+        await Car.update({...carData}, {
             where: { id: req.params.id }
         });
+        req.flash("success", "Data Berhasil Disimpan");
         res.redirect("/");
     } catch (error) {
         res.status(500).json({

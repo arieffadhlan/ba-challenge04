@@ -25,10 +25,7 @@ exports.cloudinaryUpload = async (req, res, next) => {
       req.image = uploadImage.secure_url;
       next();
     } catch (error) {
-      res.status(400).json({
-				status: "Error",
-        message: "Terjadi kesalahan pada saat upload file!",
-        message_description: error.message
-      });
+      req.flash("error", error.message);
+      res.redirect("/");
     }
 };
